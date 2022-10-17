@@ -1,0 +1,28 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+    int find_Nth_Digit(int n) {
+        int digit_length = 1;
+        while (n > digit_length * 9 * pow(10, digit_length - 1)) {
+            n -= digit_length * 9 * pow(10, digit_length - 1);
+            ++digit_length;
+        }
+
+        const int num = pow(10, digit_length - 1) + (n - 1) / digit_length;
+
+        int result = num / pow(10, (digit_length - 1) - (n - 1) % digit_length);
+        
+		result %= 10;
+
+        return result;
+    }
+   
+int main()
+{
+    int n = 7;
+    cout << "\n " <<  n << "th digit of the infinite integer sequence is " << find_Nth_Digit(n) << endl;
+    n = 13;
+    cout << "\n " <<  n << "th digit of the infinite integer sequence is " << find_Nth_Digit(n) << endl;    
+    return 0;
+}
